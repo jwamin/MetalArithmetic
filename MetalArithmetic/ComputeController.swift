@@ -7,51 +7,132 @@
 //
 
 import Metal
+import SwiftUI
 import Combine
 
-protocol CalculatorKernel {
+enum KernelType {
+  case metal
+  case cpu
+}
+
+enum OperandState {
+  case lhs
+  case rhs
+  case done
+}
+
+protocol CalculatorKernel : ObservableObject {
   
   var outputString: String {
     get
   }
   
+  var type: KernelType {
+    get
+  }
+  
 }
 
-
-class ComputeController : CalculatorKernel, ObservableObject {
+class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
   
   var device:MTLDevice?
   var computePipelineState: MTLComputePipelineState!
+  var commandQueue: MTLCommandQueue!
   
-  var op: ArithmeticOperator = ArithmeticOperator(rawValue:0)
+  var type: KernelType = .metal
   
-  @Published var outputString: String = "0" {
-    didSet {
-      print("we updated \(outputString)")
+  
+  var lhs: String? = nil
+  var rhs: String? = nil
+  var operation: ArithmeticOperator?
+  var operandState: OperandState = .lhs
+  
+  @Published var outputString: String = "0"
+  
+  func addToOperand(value:String){
+    
+    guard let _ = Int(value) else {
+      return
     }
+    
+    switch operandState {
+    case .lhs:
+      (lhs != nil) ? lhs!.append(value) : (lhs = value);
+    case .rhs:
+      (rhs != nil) ? rhs!.append(value) : (rhs = value);
+    case .done:
+      return
+    }
+    
   }
   
-  init() {
+  func addOperation(rawValue:Int){
+    let operation = ArithmeticOperator(UInt32(rawValue))
     
-    guard let device = MTLCreateSystemDefaultDevice(), device.supportsFeatureSet(.iOS_GPUFamily4_v2) else {
-      outputString = "No Metal"
+    self.operation = operation
+    
+  }
+  
+  func run(){
+
+    guard let gotlhs = lhs, let gotrhs = rhs, let gotOperation = operation else {
+      return
+    }
+    
+    var answerString = ""
+    
+    switch gotOperation.rawValue{
+    case 0:
+      answerString = "\(Int(gotlhs)!+Int(gotrhs)!)"
+    default:
+      reset()
+      return
+    }
+    
+    //cpu to test
+    outputString = answerString
+    
+    operandState = .done
+    
+  }
+  
+  func reset(){
+    rhs = nil
+    lhs = nil
+    operation = nil
+    operandState = .lhs
+    outputString = "0"
+  }
+  
+  init(device:MTLDevice?){
+    
+    guard let device = device else {
+      type = .cpu
+      performAddition()
       return
     }
     
     self.device = device
-    
-    switch op.rawValue {
-    case 0:
-      print("addition")
-    default:
-      print("something else")
-    }
-    
-    let commandQueue = device.makeCommandQueue()
+    commandQueue = device.makeCommandQueue()
     let metalLibrary = device.makeDefaultLibrary()
     let kFunction = metalLibrary?.makeFunction(name: "kernel_main")!
     
     computePipelineState = try! device.makeComputePipelineState(function: kFunction!)
+    
+    performAddition()
+    
+  }
+  
+  private func performAddition(){
+    switch(type){
+    case .cpu:
+      outputString = "\(4+6) on CPU"
+    case .metal:
+      commitMetalCompute()
+    }
+  }
+  
+  private func commitMetalCompute(){
     
     var commandBuffer = commandQueue?.makeCommandBuffer()
     
@@ -67,7 +148,7 @@ class ComputeController : CalculatorKernel, ObservableObject {
     
     encoder?.setBytes(rhs, length: MemoryLayout<Float>.stride, index: 1)
 
-    var outBuffer = device.makeBuffer(length: MemoryLayout<Float>.size, options: .storageModeShared)!
+    var outBuffer = device!.makeBuffer(length: MemoryLayout<Float>.size, options: .storageModeShared)!
     
     encoder?.setBuffer(outBuffer, offset: 0, index: 2)
     
@@ -84,18 +165,69 @@ class ComputeController : CalculatorKernel, ObservableObject {
       let contents = outBuffer.contents()
       let fl = Float(contents.bindMemory(to: Float.self, capacity: 1).pointee)
       DispatchQueue.main.async {
-        self.answer = fl
         self.outputString = "Answer from gpu: \(fl)"
       }
     })
     commandBuffer?.commit()
     commandBuffer?.waitUntilCompleted()
 
+    
+  }
+  
+}
 
+class CPUComputeKernel : CalculatorKernel, ObservableObject {
+  
+  @Published var outputString: String = "0"
+  let type: KernelType = .cpu
+  init () { }
+  
+}
+
+
+class ComputeController : ObservableObject {
+  
+  //refactor to use opaque return type, surely
+  @ObservedObject var kernel: GPUComputeCalcKernel
+
+  var answerString: String {
+    return self.kernel.outputString
+  }
+  
+  init() {
+    
+    kernel = ComputeController.getKernel()
+    
+
+
+    var op: ArithmeticOperator = ArithmeticOperator(rawValue:0)
+    
+    switch op.rawValue {
+    case 0:
+      print("addition")
+    default:
+      print("something else")
+    }
+
+    kernel.objectWillChange.sink { _ in
+      self.objectWillChange.send()
+    }
     
   }
   
   var answer:Float!
+  
+  static func getKernel() -> GPUComputeCalcKernel {
+
+      guard let device = MTLCreateSystemDefaultDevice(), device.supportsFeatureSet(.iOS_GPUFamily4_v2) else {
+         print("no metal")
+         let kernel = GPUComputeCalcKernel(device: nil)
+         return kernel
+       }
+       
+       return GPUComputeCalcKernel(device: device)
+       
+  }
   
 }
 

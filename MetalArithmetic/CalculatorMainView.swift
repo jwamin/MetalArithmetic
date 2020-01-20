@@ -16,7 +16,11 @@ struct CalculatorMainView: View {
       ZStack{
         Rectangle().fill(Color.black).frame( maxWidth: .infinity, maxHeight: .infinity).edgesIgnoringSafeArea(.all)
       VStack(spacing: 0){
-        Text(controller.outputString).multilineTextAlignment(.trailing).font(.title).foregroundColor(.white).padding().frame(maxWidth: .infinity, maxHeight: 100,alignment: .trailing)
+        Text(controller.answerString).multilineTextAlignment(.trailing).font(.title).foregroundColor(.white).padding().frame(maxWidth: .infinity, maxHeight: 100,alignment: .trailing)
+        HStack{
+          Text("Metal:").foregroundColor(.gray)
+          Text((controller.kernel.type == .metal) ? "Enabled" : "Disabled").foregroundColor((controller.kernel.type == .metal) ? .green : .gray)
+        }
         HStack(alignment: .center,spacing: 0){
           
           VStack(alignment: .center, spacing: 0){
@@ -30,30 +34,30 @@ struct CalculatorMainView: View {
             }
             HStack(alignment: .center){
               CalcButton(action: {}, label:"∆%", color: .brown)
-              CalcButton(action: {}, label:"7")
-              CalcButton(action: {}, label:"8")
-              CalcButton(action: {}, label:"9")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"7")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"8")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"9")
               CalcButton(action: {}, label:"÷", color: .brown)
             }
             HStack(alignment: .center){
               CalcButton(action: {}, label:"√", color: .brown)
-              CalcButton(action: {}, label:"4")
-              CalcButton(action: {}, label:"5")
-              CalcButton(action: {}, label:"6")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"4")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"5")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"6")
               CalcButton(action: {}, label:"×", color: .brown)
             }
             HStack(alignment: .center){
               CalcButton(action: {}, label:"%", color: .brown)
-              CalcButton(action: {}, label:"1")
-              CalcButton(action: {}, label:"2")
-              CalcButton(action: {}, label:"3")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"1")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"2")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"3")
               CalcButton(action: {}, label:"-",color: .brown)
             }
             HStack(alignment: .center){
-              CalcButton(action: {}, label:"CE C", color: .brown)
-              CalcButton(action: {}, label:"0")
+              CalcButton(action: {self.controller.kernel.reset()}, label:"CE C", color: .brown)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"0")
               CalcButton(action: {}, label:".", color: .brown)
-              CalcButton(action: {}, label:"=", color: .orange)
+              CalcButton(action: {self.controller.kernel.run()}, label:"=", color: .orange)
               CalcButton(action: {}, label:"+", color: .brown)
             }
           }.padding()
