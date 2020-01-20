@@ -15,8 +15,8 @@ struct CalculatorMainView: View {
     var body: some View {
       ZStack{
         Rectangle().fill(Color.black).frame( maxWidth: .infinity, maxHeight: .infinity).edgesIgnoringSafeArea(.all)
-      VStack(alignment:.leading,spacing: 0){
-        Text(controller.outputString).font(.title).foregroundColor(.white)
+      VStack(spacing: 0){
+        Text(controller.outputString).multilineTextAlignment(.trailing).font(.title).foregroundColor(.white).padding().frame(maxWidth: .infinity, maxHeight: 100,alignment: .trailing)
         HStack(alignment: .center,spacing: 0){
           
           VStack(alignment: .center, spacing: 0){
