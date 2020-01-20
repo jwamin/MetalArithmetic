@@ -9,21 +9,26 @@
 /* Begin PBXBuildFile section */
 		577E61AD23D6046300A5FB49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61AC23D6046300A5FB49 /* AppDelegate.swift */; };
 		577E61AF23D6046300A5FB49 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61AE23D6046300A5FB49 /* SceneDelegate.swift */; };
-		577E61B123D6046300A5FB49 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61B023D6046300A5FB49 /* ContentView.swift */; };
+		577E61B123D6046300A5FB49 /* CalculatorMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61B023D6046300A5FB49 /* CalculatorMainView.swift */; };
 		577E61B323D6046600A5FB49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 577E61B223D6046600A5FB49 /* Assets.xcassets */; };
 		577E61B623D6046600A5FB49 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 577E61B523D6046600A5FB49 /* Preview Assets.xcassets */; };
 		577E61B923D6046600A5FB49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 577E61B723D6046600A5FB49 /* LaunchScreen.storyboard */; };
+		577E61C123D604B100A5FB49 /* ComputeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61C023D604B100A5FB49 /* ComputeController.swift */; };
+		577E61C323D604E600A5FB49 /* ComputeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 577E61C223D604E600A5FB49 /* ComputeShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		577E61A923D6046300A5FB49 /* MetalArithmetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalArithmetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		577E61AC23D6046300A5FB49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		577E61AE23D6046300A5FB49 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		577E61B023D6046300A5FB49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		577E61B023D6046300A5FB49 /* CalculatorMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorMainView.swift; sourceTree = "<group>"; };
 		577E61B223D6046600A5FB49 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		577E61B523D6046600A5FB49 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		577E61B823D6046600A5FB49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		577E61BA23D6046600A5FB49 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		577E61C023D604B100A5FB49 /* ComputeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputeController.swift; sourceTree = "<group>"; };
+		577E61C223D604E600A5FB49 /* ComputeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ComputeShaders.metal; sourceTree = "<group>"; };
+		577E61C423D6051300A5FB49 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +61,12 @@
 		577E61AB23D6046300A5FB49 /* MetalArithmetic */ = {
 			isa = PBXGroup;
 			children = (
+				577E61C423D6051300A5FB49 /* Common.h */,
+				577E61C223D604E600A5FB49 /* ComputeShaders.metal */,
 				577E61AC23D6046300A5FB49 /* AppDelegate.swift */,
 				577E61AE23D6046300A5FB49 /* SceneDelegate.swift */,
-				577E61B023D6046300A5FB49 /* ContentView.swift */,
+				577E61B023D6046300A5FB49 /* CalculatorMainView.swift */,
+				577E61C023D604B100A5FB49 /* ComputeController.swift */,
 				577E61B223D6046600A5FB49 /* Assets.xcassets */,
 				577E61B723D6046600A5FB49 /* LaunchScreen.storyboard */,
 				577E61BA23D6046600A5FB49 /* Info.plist */,
@@ -146,9 +154,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				577E61C323D604E600A5FB49 /* ComputeShaders.metal in Sources */,
 				577E61AD23D6046300A5FB49 /* AppDelegate.swift in Sources */,
 				577E61AF23D6046300A5FB49 /* SceneDelegate.swift in Sources */,
-				577E61B123D6046300A5FB49 /* ContentView.swift in Sources */,
+				577E61B123D6046300A5FB49 /* CalculatorMainView.swift in Sources */,
+				577E61C123D604B100A5FB49 /* ComputeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +305,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.jossy.MetalArithmetic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/MetalArithmetic/Common.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -315,6 +326,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.jossy.MetalArithmetic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/MetalArithmetic/Common.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
