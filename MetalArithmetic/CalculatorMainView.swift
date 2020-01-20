@@ -13,8 +13,10 @@ struct CalculatorMainView: View {
   @ObservedObject var controller: ComputeController = ComputeController();
   
     var body: some View {
+      ZStack{
+        Rectangle().fill(Color.black).frame( maxWidth: .infinity, maxHeight: .infinity).edgesIgnoringSafeArea(.all)
       VStack(alignment:.leading,spacing: 0){
-        Text("Hello, World!,\n\(controller.outputString)").font(.title).foregroundColor(.white)
+        Text(controller.outputString).font(.title).foregroundColor(.white)
         HStack(alignment: .center,spacing: 0){
           
           VStack(alignment: .center, spacing: 0){
@@ -57,6 +59,7 @@ struct CalculatorMainView: View {
           }.padding()
         }
       }.background(Color.black)
+      }
   }
 }
 

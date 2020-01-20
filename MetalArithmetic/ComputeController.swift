@@ -25,7 +25,11 @@ class ComputeController : CalculatorKernel, ObservableObject {
   
   var op: ArithmeticOperator = ArithmeticOperator(rawValue:0)
   
-  @Published var outputString = "0"
+  @Published var outputString: String = "0" {
+    didSet {
+      print("we updated \(outputString)")
+    }
+  }
   
   init() {
     
@@ -70,11 +74,19 @@ class ComputeController : CalculatorKernel, ObservableObject {
     encoder?.dispatchThreads(MTLSizeMake(1, 1, 1), threadsPerThreadgroup: MTLSizeMake(1, 1, 1))
     
     encoder?.endEncoding()
-    commandBuffer?.addCompletedHandler({ (buffer) in
+    commandBuffer?.addCompletedHandler({ [weak self] (buffer) in
+      
+      guard let self = self else {
+        return
+      }
+      
       print(buffer.status == .completed)
       let contents = outBuffer.contents()
-      let fl = contents.bindMemory(to: Float.self, capacity: 1)
-      self.outputString = "Answer from gpu: \(fl.pointee.rounded())"
+      let fl = Float(contents.bindMemory(to: Float.self, capacity: 1).pointee)
+      DispatchQueue.main.async {
+        self.answer = fl
+        self.outputString = "Answer from gpu: \(fl)"
+      }
     })
     commandBuffer?.commit()
     commandBuffer?.waitUntilCompleted()
@@ -83,6 +95,7 @@ class ComputeController : CalculatorKernel, ObservableObject {
     
   }
   
+  var answer:Float!
   
 }
 
