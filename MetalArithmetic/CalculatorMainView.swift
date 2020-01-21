@@ -34,49 +34,36 @@ struct CalculatorMainView: View {
             }
             HStack(alignment: .center){
               CalcButton(action: {}, label:"∆%", color: .brown)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"7")
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"8")
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"9")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"7", isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "8") }, label:"8", isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "9") }, label:"9", isEnabled: true)
               CalcButton(action: {}, label:"÷", color: .brown)
             }
             HStack(alignment: .center){
               CalcButton(action: {}, label:"√", color: .brown)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"4")
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"5")
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"6")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "4") }, label:"4", isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "5") }, label:"5", isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "6") }, label:"6", isEnabled: true)
               CalcButton(action: {}, label:"×", color: .brown)
             }
             HStack(alignment: .center){
               CalcButton(action: {}, label:"%", color: .brown)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"1")
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"2")
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"3")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "1") }, label:"1", isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "2") }, label:"2", isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "3") }, label:"3", isEnabled: true)
               CalcButton(action: {}, label:"-",color: .brown)
             }
             HStack(alignment: .center){
-              CalcButton(action: {self.controller.kernel.reset()}, label:"CE C", color: .brown)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"0")
-              CalcButton(action: {}, label:".", color: .brown)
-              CalcButton(action: {self.controller.kernel.run()}, label:"=", color: .orange)
-              CalcButton(action: {}, label:"+", color: .brown)
+              CalcButton(action: {self.controller.kernel.reset()}, label:"CE C", color: .brown, isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "0") }, label:"0", isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: ".") }, label:".", color: .brown, isEnabled: true)
+              CalcButton(action: {self.controller.kernel.run()}, label:"=", color: .orange, isEnabled: true)
+              CalcButton(action: { self.controller.kernel.addOperation(rawValue: 0) }, label:"+", color: .brown, isEnabled: true)
             }
           }.padding()
         }
       }.background(Color.black)
       }
-  }
-}
-
-struct CalcButton : View {
-  
-  var action:()->Void
-  var label: String
-  var color: Color = .black
-  
-  var body: some View {
-    GeometryReader { reader in
-      Button(action: self.action, label: { Text(self.label).foregroundColor(.white).font(.title).frame(minWidth: 0, idealWidth: .infinity, maxWidth: .infinity,maxHeight: reader.size.width) }).background(Circle().fill(self.color)).frame(maxHeight:reader.size.width)
-    }
   }
 }
 
@@ -86,11 +73,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-extension Color {
-  static var brown: Color {
-    return Color(UIColor.brown)
-  }
-  static var darkGreen: Color {
-    return Color(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1))
-  }
-}

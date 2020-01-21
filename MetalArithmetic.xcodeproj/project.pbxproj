@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		57436F2823D679C200A0453F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57436F2723D679C200A0453F /* Extensions.swift */; };
+		57436F2A23D67C5100A0453F /* ComputeKernel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57436F2923D67C5100A0453F /* ComputeKernel.swift */; };
 		577E61AD23D6046300A5FB49 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61AC23D6046300A5FB49 /* AppDelegate.swift */; };
 		577E61AF23D6046300A5FB49 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61AE23D6046300A5FB49 /* SceneDelegate.swift */; };
 		577E61B123D6046300A5FB49 /* CalculatorMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61B023D6046300A5FB49 /* CalculatorMainView.swift */; };
@@ -15,10 +17,13 @@
 		577E61B923D6046600A5FB49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 577E61B723D6046600A5FB49 /* LaunchScreen.storyboard */; };
 		577E61C123D604B100A5FB49 /* ComputeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61C023D604B100A5FB49 /* ComputeController.swift */; };
 		577E61C323D604E600A5FB49 /* ComputeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 577E61C223D604E600A5FB49 /* ComputeShaders.metal */; };
+		57B3BF0E23D6848100DD279F /* CalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3BF0D23D6848100DD279F /* CalcButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		57436F2623D6198700A0453F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		57436F2723D679C200A0453F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		57436F2923D67C5100A0453F /* ComputeKernel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputeKernel.swift; sourceTree = "<group>"; };
 		577E61A923D6046300A5FB49 /* MetalArithmetic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetalArithmetic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		577E61AC23D6046300A5FB49 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		577E61AE23D6046300A5FB49 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,6 +35,7 @@
 		577E61C023D604B100A5FB49 /* ComputeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComputeController.swift; sourceTree = "<group>"; };
 		577E61C223D604E600A5FB49 /* ComputeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ComputeShaders.metal; sourceTree = "<group>"; };
 		577E61C423D6051300A5FB49 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		57B3BF0D23D6848100DD279F /* CalcButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +74,10 @@
 				577E61AC23D6046300A5FB49 /* AppDelegate.swift */,
 				577E61AE23D6046300A5FB49 /* SceneDelegate.swift */,
 				577E61B023D6046300A5FB49 /* CalculatorMainView.swift */,
+				57B3BF0D23D6848100DD279F /* CalcButton.swift */,
 				577E61C023D604B100A5FB49 /* ComputeController.swift */,
+				57436F2923D67C5100A0453F /* ComputeKernel.swift */,
+				57436F2723D679C200A0453F /* Extensions.swift */,
 				577E61B223D6046600A5FB49 /* Assets.xcassets */,
 				577E61B723D6046600A5FB49 /* LaunchScreen.storyboard */,
 				577E61BA23D6046600A5FB49 /* Info.plist */,
@@ -157,9 +166,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				577E61C323D604E600A5FB49 /* ComputeShaders.metal in Sources */,
+				57436F2823D679C200A0453F /* Extensions.swift in Sources */,
+				57B3BF0E23D6848100DD279F /* CalcButton.swift in Sources */,
 				577E61AD23D6046300A5FB49 /* AppDelegate.swift in Sources */,
 				577E61AF23D6046300A5FB49 /* SceneDelegate.swift in Sources */,
 				577E61B123D6046300A5FB49 /* CalculatorMainView.swift in Sources */,
+				57436F2A23D67C5100A0453F /* ComputeKernel.swift in Sources */,
 				577E61C123D604B100A5FB49 /* ComputeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
