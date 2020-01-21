@@ -33,19 +33,18 @@ class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
   
   func addToOperand(value:String){
     
-    guard let _ = Int(value) else {
-      return
-    }
-    
     switch operandState {
     case .lhs:
       (lhs != nil) ? lhs!.append(value) : (lhs = value);
+      outputString = lhs!
     case .rhs:
       (rhs != nil) ? rhs!.append(value) : (rhs = value);
+      outputString = rhs!
     case .done:
       return
     }
     print("that worked")
+    
     debug()
   }
   
@@ -59,6 +58,7 @@ class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
     
     self.operation = operation
     operandState = .rhs
+    
     debug()
   }
   
@@ -150,7 +150,7 @@ class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
       let contents = outBuffer.contents()
       let fl = Float(contents.bindMemory(to: Float.self, capacity: 1).pointee)
       DispatchQueue.main.async {
-        self.outputString = "Answer from gpu: \(fl)"
+        self.outputString = "Answer from GPU: \(fl)"
         self.operandState = .done
         self.debug()
       }

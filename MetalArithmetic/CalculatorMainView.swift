@@ -15,12 +15,12 @@ struct CalculatorMainView: View {
     var body: some View {
       ZStack{
         Rectangle().fill(Color.black).frame( maxWidth: .infinity, maxHeight: .infinity).edgesIgnoringSafeArea(.all)
-      VStack(spacing: 0){
-        Text(controller.answerString).multilineTextAlignment(.trailing).font(.title).foregroundColor(.white).padding().frame(maxWidth: .infinity, maxHeight: 100,alignment: .trailing)
+        VStack(alignment:.leading,spacing: 0){
+        Text(controller.answerString).multilineTextAlignment(.trailing).font(.largeTitle).foregroundColor(.white).padding().frame(maxWidth: .infinity, maxHeight: 100,alignment: .trailing)
         HStack{
           Text("Metal:").foregroundColor(.gray)
-          Text((controller.kernel.type == .metal) ? "Enabled" : "Disabled").foregroundColor((controller.kernel.type == .metal) ? .green : .gray)
-        }
+          Text((controller.kernel.type == .metal) ? "ENABLED" : "Disabled").foregroundColor((controller.kernel.type == .metal) ? .green : .gray)
+          }.frame(maxWidth: .infinity,alignment: .trailing).padding()
         HStack(alignment: .center,spacing: 0){
           
           VStack(alignment: .center, spacing: 0){
