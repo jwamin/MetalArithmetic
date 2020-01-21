@@ -1,5 +1,7 @@
 #  Metal Arithmetic
 
+![Metal Arithmetic Screenshot](/screenshots/screen.jpeg?raw=true "Screenshot")
+
 ## Metal Compute Shader Calculator with SwiftUI
 
 ## Done
@@ -12,4 +14,5 @@
 ### TODO
 * Compute shaders to perform other basic arithmetic
 * CPU fallback
+* Unit Tests CPU vs GPU
 
