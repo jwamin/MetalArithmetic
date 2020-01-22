@@ -17,8 +17,6 @@ struct CalcButton : View {
   
   var body: some View {
 
-
-    
     return GeometryReader { reader in
 
       return Button(action: self.action, label: {
@@ -40,24 +38,24 @@ struct CalcButton : View {
 
   func getGradient(color:UIColor, size: CGSize) -> some View {
     
-    let offsetDvcisor:CGFloat = 10
-    let offsetSize = CGSize(width: size.width/offsetDvcisor, height: size.width/offsetDvcisor)
-    let sizeMod:CGFloat = 1.4
+    let offsetDivisor:CGFloat = 8
+    let offsetSize = CGSize(width: size.width/offsetDivisor, height: size.width/offsetDivisor)
+    let sizeMod:CGFloat = 2
+    let gradientSizeMultiplier:CGFloat = 1.0
   
     let mainColor = Color(color)
-    let lightened = UIColor(red: 1, green: 1, blue: 1, alpha: 0.2)
+    let lightened = UIColor(red: 1, green: 1, blue: 1, alpha: 0.1)
     let lightenedColor = Color(lightened)
     
     let myGradient = Gradient(stops:
       [Gradient.Stop(color: mainColor, location: 0),
-       Gradient.Stop(color: mainColor, location: 0.5),
-       Gradient.Stop(color: mainColor, location: 0.5),
+       Gradient.Stop(color: mainColor, location: 0.45),
        Gradient.Stop(color: lightenedColor, location: 0.7),
-       Gradient.Stop(color: mainColor, location: 0.8),
+       Gradient.Stop(color: mainColor, location: 0.9),
        Gradient.Stop(color: mainColor, location: 1)
     ])
     
-    return RadialGradient(gradient: myGradient, center: .center, startRadius: 0, endRadius: size.width*0.9).offset(offsetSize).frame(width: size.width * sizeMod, height: size.width * sizeMod)
+    return RadialGradient(gradient: myGradient, center: .center, startRadius: 0, endRadius: size.width*gradientSizeMultiplier).offset(offsetSize).frame(width: size.width * sizeMod, height: size.width * sizeMod)
   }
  
   
