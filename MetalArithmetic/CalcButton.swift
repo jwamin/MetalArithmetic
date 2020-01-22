@@ -22,7 +22,6 @@ struct CalcButton : View {
     return GeometryReader { reader in
 
       return Button(action: self.action, label: {
-   
         
         return Text(self.label)
         .foregroundColor(.white)
