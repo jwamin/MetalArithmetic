@@ -18,6 +18,7 @@
 		577E61C123D604B100A5FB49 /* ComputeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577E61C023D604B100A5FB49 /* ComputeController.swift */; };
 		577E61C323D604E600A5FB49 /* ComputeShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 577E61C223D604E600A5FB49 /* ComputeShaders.metal */; };
 		57B3BF0E23D6848100DD279F /* CalcButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3BF0D23D6848100DD279F /* CalcButton.swift */; };
+		57B3BF1023D7C9A600DD279F /* GlossyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B3BF0F23D7C9A600DD279F /* GlossyButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		577E61C223D604E600A5FB49 /* ComputeShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = ComputeShaders.metal; sourceTree = "<group>"; };
 		577E61C423D6051300A5FB49 /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		57B3BF0D23D6848100DD279F /* CalcButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalcButton.swift; sourceTree = "<group>"; };
+		57B3BF0F23D7C9A600DD279F /* GlossyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossyButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				57436F2623D6198700A0453F /* README.md */,
+				57B3BF0F23D7C9A600DD279F /* GlossyButton.swift */,
 				577E61AB23D6046300A5FB49 /* MetalArithmetic */,
 				577E61AA23D6046300A5FB49 /* Products */,
 			);
@@ -166,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				577E61C323D604E600A5FB49 /* ComputeShaders.metal in Sources */,
+				57B3BF1023D7C9A600DD279F /* GlossyButton.swift in Sources */,
 				57436F2823D679C200A0453F /* Extensions.swift in Sources */,
 				57B3BF0E23D6848100DD279F /* CalcButton.swift in Sources */,
 				577E61AD23D6046300A5FB49 /* AppDelegate.swift in Sources */,

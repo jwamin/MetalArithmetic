@@ -40,7 +40,13 @@ extension Color {
     return Color(UIColor.brown)
   }
   static var darkGreen: Color {
-    return Color(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1))
+    return Color(.darkGreen)
+  }
+}
+
+extension UIColor {
+  static var darkGreen: UIColor {
+    #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
   }
 }
 
