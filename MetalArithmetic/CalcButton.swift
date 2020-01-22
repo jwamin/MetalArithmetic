@@ -23,8 +23,8 @@ struct CalcButton : View {
         
         return Text(self.label)
         .foregroundColor(.white)
-          .font(.title)
-        .frame(minWidth: 0, idealWidth: .infinity, maxWidth: .infinity,maxHeight: reader.size.width) })
+          .font(.title).aspectRatio(CGFloat(1.0),contentMode: .fit)
+          .frame( idealWidth: .infinity, maxWidth: .infinity, idealHeight: .infinity, maxHeight: reader.size.height) })
         .disabled(!self.isEnabled)
         .background( (self.color != .black) ? AnyView(Circle().fill(Color(self.color)).overlay(self.getGradient(color: self.color, size: reader.size))) : AnyView(Circle().stroke(style: StrokeStyle(lineWidth: 1))
           .stroke(Color.white)))

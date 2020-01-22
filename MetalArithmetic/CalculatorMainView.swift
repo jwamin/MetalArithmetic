@@ -15,15 +15,15 @@ struct CalculatorMainView: View {
     var body: some View {
       ZStack{
         Rectangle().fill(Color.black).frame( maxWidth: .infinity, maxHeight: .infinity).edgesIgnoringSafeArea(.all)
-        VStack(alignment:.leading,spacing: 0){
-        Text(controller.answerString).multilineTextAlignment(.trailing).font(.largeTitle).foregroundColor(.white).padding().frame(maxWidth: .infinity, maxHeight: 100,alignment: .trailing)
+        VStack(alignment:.leading){
+          Text(controller.answerString).multilineTextAlignment(.trailing).font(.largeTitle).foregroundColor(.white).frame(maxWidth: .infinity,alignment: .trailing).padding()
         HStack{
           Text("Metal:").foregroundColor(.gray)
           Text((controller.kernel.type == .metal) ? "ENABLED" : "Disabled").foregroundColor((controller.kernel.type == .metal) ? .green : .gray)
-          }.frame(maxWidth: .infinity,alignment: .trailing).padding()
-        HStack(alignment: .center,spacing: 0){
+        }.frame(maxWidth: .infinity,alignment: .trailing).padding(.trailing)
+        HStack{
           
-          VStack(alignment: .center, spacing: 0){
+          VStack(alignment: .center){
             Spacer()
             HStack(alignment: .top){
               CalcButton(action: {}, label:"M+", color: .darkGreen, isEnabled: false)
@@ -69,7 +69,11 @@ struct CalculatorMainView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        CalculatorMainView()
+      Group{
+        CalculatorMainView().environment(\.horizontalSizeClass, .compact)
+        CalculatorMainView().previewLayout(.fixed(width: 568, height: 320)) 
+        CalculatorMainView().previewDevice(PreviewDevice(rawValue: "iPhone SE")).previewDisplayName("iPhone SE")
+      }
     }
 }
 
