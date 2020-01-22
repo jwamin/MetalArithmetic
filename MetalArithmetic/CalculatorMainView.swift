@@ -26,39 +26,39 @@ struct CalculatorMainView: View {
           VStack(alignment: .center, spacing: 0){
             Spacer()
             HStack(alignment: .top){
-              CalcButton(action: {}, label:"M+", color: .darkGreen)
-              CalcButton(action: {}, label:"M-", color: .darkGreen)
-              CalcButton(action: {}, label:"MR", color: .darkGreen)
-              CalcButton(action: {}, label:"MC", color: .darkGreen)
-              CalcButton(action: {}, label:"±", color: .darkGreen)
+              CalcButton(action: {}, label:"M+", color: .darkGreen, isEnabled: false)
+              CalcButton(action: {}, label:"M-", color: .darkGreen, isEnabled: false)
+              CalcButton(action: {}, label:"MR", color: .darkGreen, isEnabled: false)
+              CalcButton(action: {}, label:"MC", color: .darkGreen, isEnabled: false)
+              CalcButton(action: {}, label:"±", color: .darkGreen, isEnabled: false)
             }
             HStack(alignment: .center){
-              CalcButton(action: {}, label:"∆%", color: .brown)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"7", isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "8") }, label:"8", isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "9") }, label:"9", isEnabled: true)
-              CalcButton(action: {}, label:"÷", color: .brown)
+              CalcButton(action: {}, label:"∆%", color: .brown, isEnabled: false)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "7") }, label:"7")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "8") }, label:"8")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "9") }, label:"9")
+              CalcButton(action: { self.controller.kernel.addOperation(rawValue: 3) }, label:"÷", color: .brown)
             }
             HStack(alignment: .center){
-              CalcButton(action: {}, label:"√", color: .brown)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "4") }, label:"4", isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "5") }, label:"5", isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "6") }, label:"6", isEnabled: true)
-              CalcButton(action: {}, label:"×", color: .brown)
+              CalcButton(action: {}, label:"√", color: .brown, isEnabled: false)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "4") }, label:"4")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "5") }, label:"5")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "6") }, label:"6")
+              CalcButton(action: { self.controller.kernel.addOperation(rawValue: 2) }, label:"×", color: .brown)
             }
             HStack(alignment: .center){
-              CalcButton(action: {}, label:"%", color: .brown)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "1") }, label:"1", isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "2") }, label:"2", isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "3") }, label:"3", isEnabled: true)
-              CalcButton(action: {}, label:"-",color: .brown)
+              CalcButton(action: {}, label:"%", color: .brown, isEnabled: false)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "1") }, label:"1")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "2") }, label:"2")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "3") }, label:"3")
+              CalcButton(action: { self.controller.kernel.addOperation(rawValue: 1) }, label:"-",color: .brown)
             }
             HStack(alignment: .center){
-              CalcButton(action: {self.controller.kernel.reset()}, label:"CE C", color: .brown, isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: "0") }, label:"0", isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addToOperand(value: ".") }, label:".", color: .brown, isEnabled: true)
-              CalcButton(action: {self.controller.kernel.run()}, label:"=", color: .orange, isEnabled: true)
-              CalcButton(action: { self.controller.kernel.addOperation(rawValue: 0) }, label:"+", color: .brown, isEnabled: true)
+              CalcButton(action: { self.controller.kernel.reset() }, label:"CE C", color: .brown)
+              CalcButton(action: { self.controller.kernel.addToOperand(value: "0") }, label:"0")
+              CalcButton(action: { self.controller.kernel.addToOperand(value: ".") }, label:".", color: .brown)
+              CalcButton(action: { self.controller.kernel.run() }, label:"=", color: .orange)
+              CalcButton(action: { self.controller.kernel.addOperation(rawValue: 0) }, label:"+", color: .brown)
             }
           }.padding()
         }

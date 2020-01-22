@@ -13,7 +13,7 @@ struct CalcButton : View {
   var action:()->Void
   var label: String
   var color: UIColor = .black
-  @State var isEnabled: Bool = false
+  @State var isEnabled: Bool = true
   
   var body: some View {
 

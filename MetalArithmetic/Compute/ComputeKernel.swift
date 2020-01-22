@@ -70,7 +70,13 @@ class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
 
     switch gotOperation.rawValue{
     case 0:
-      performAddition()
+      performOperation()
+      case 1:
+      performOperation()
+      case 2:
+      performOperation()
+      case 3:
+      performOperation()
     default:
       reset()
       return
@@ -90,7 +96,7 @@ class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
     
     guard let device = device else {
       type = .cpu
-      performAddition()
+      performOperation()
       return
     }
     
@@ -101,24 +107,58 @@ class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
     
     computePipelineState = try! device.makeComputePipelineState(function: kFunction!)
     
-    performAddition()
+    performOperation()
     
   }
   
-  private func performAddition(){
+  private func performOperation(){
     switch(type){
     case .cpu:
-      outputString = "\(4+6) on CPU"
-      operandState = .done
-      debug()
+      commitCPUCompute()
     case .metal:
       commitMetalCompute()
     }
   }
   
-  private func commitMetalCompute(){
+  private func commitCPUCompute(){
     
     guard let gotlhs = lhs, let gotrhs = rhs, let gotOperation = operation, var lhs = Float(gotlhs), var rhs = Float(gotrhs) else {
+      print("some error")
+      return
+    }
+    
+    /*
+     addition = 0,
+     subtraction = 1,
+     multiplication = 2,
+     division = 3
+     */
+    
+    var outputFl:Float = 0.0
+    switch gotOperation.rawValue{
+    case 0:
+      outputFl = lhs + rhs;
+    case 1:
+      outputFl = lhs - rhs;
+    case 2:
+      outputFl = lhs * rhs;
+    case 3:
+      outputFl = lhs / rhs;
+    default:
+      fatalError()
+    }
+    
+    outputString = "\(outputFl)"
+    self.lhs = outputString
+    self.rhs = ""
+    operandState = .done
+    debug()
+    
+  }
+  
+  private func commitMetalCompute(){
+    
+    guard let gotlhs = lhs, let gotrhs = rhs, var gotOperation = operation, var lhs = Float(gotlhs), var rhs = Float(gotrhs) else {
       print("some error")
       return
     }
@@ -127,16 +167,13 @@ class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
     
     let encoder = commandBuffer?.makeComputeCommandEncoder()
     
-    encoder?.setComputePipelineState(computePipelineState)
-    
-    encoder?.setBytes(&lhs, length: MemoryLayout<Float>.stride, index: 0)
-    
-    encoder?.setBytes(&rhs, length: MemoryLayout<Float>.stride, index: 1)
-
     var outBuffer = device!.makeBuffer(length: MemoryLayout<Float>.size, options: .storageModeShared)!
     
+    encoder?.setComputePipelineState(computePipelineState)
+    encoder?.setBytes(&lhs, length: MemoryLayout<Float>.stride, index: 0)
+    encoder?.setBytes(&rhs, length: MemoryLayout<Float>.stride, index: 1)
     encoder?.setBuffer(outBuffer, offset: 0, index: 2)
-    
+    encoder?.setBytes(&gotOperation, length: MemoryLayout<Int>.stride, index: 3)
     encoder?.dispatchThreads(MTLSizeMake(1, 1, 1), threadsPerThreadgroup: MTLSizeMake(1, 1, 1))
     
     encoder?.endEncoding()
@@ -151,6 +188,8 @@ class GPUComputeCalcKernel : CalculatorKernel, ObservableObject {
       let fl = Float(contents.bindMemory(to: Float.self, capacity: 1).pointee)
       DispatchQueue.main.async {
         self.outputString = "Answer from GPU: \(fl)"
+        self.lhs = "\(fl)"
+        self.rhs = ""
         self.operandState = .done
         self.debug()
       }

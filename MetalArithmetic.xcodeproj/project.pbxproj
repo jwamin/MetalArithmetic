@@ -69,14 +69,12 @@
 		577E61AB23D6046300A5FB49 /* MetalArithmetic */ = {
 			isa = PBXGroup;
 			children = (
+				57B3BF1123D90D0A00DD279F /* Compute */,
 				577E61C423D6051300A5FB49 /* Common.h */,
-				577E61C223D604E600A5FB49 /* ComputeShaders.metal */,
 				577E61AC23D6046300A5FB49 /* AppDelegate.swift */,
 				577E61AE23D6046300A5FB49 /* SceneDelegate.swift */,
 				577E61B023D6046300A5FB49 /* CalculatorMainView.swift */,
 				57B3BF0D23D6848100DD279F /* CalcButton.swift */,
-				577E61C023D604B100A5FB49 /* ComputeController.swift */,
-				57436F2923D67C5100A0453F /* ComputeKernel.swift */,
 				57436F2723D679C200A0453F /* Extensions.swift */,
 				577E61B223D6046600A5FB49 /* Assets.xcassets */,
 				577E61B723D6046600A5FB49 /* LaunchScreen.storyboard */,
@@ -92,6 +90,16 @@
 				577E61B523D6046600A5FB49 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		57B3BF1123D90D0A00DD279F /* Compute */ = {
+			isa = PBXGroup;
+			children = (
+				577E61C223D604E600A5FB49 /* ComputeShaders.metal */,
+				57436F2923D67C5100A0453F /* ComputeKernel.swift */,
+				577E61C023D604B100A5FB49 /* ComputeController.swift */,
+			);
+			path = Compute;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
