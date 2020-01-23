@@ -10,20 +10,23 @@
 #include "../Common.h"
 using namespace metal;
 
-kernel void kernel_main(const device float* left [[buffer(0)]], const device float* right [[buffer(1)]], device float* results, const device ArithmeticOperator *operation){
+kernel void kernel_main(const device float* left [[buffer(0)]],
+                        const device float* right [[buffer(1)]],
+                        device float* results,
+                        const device ArithmeticOperator *operation){
   
   switch(*operation){
     case addition:
-      *results = *right + *left;
+      *results = *left + *right;
         break;
     case subtraction:
-      *results = *right - *left;
+      *results = *left - *right;
         break;
     case multiplication:
-      *results = *right * *left;
+      *results = *left * *right;
         break;
     case division:
-      *results = *right / *left;
+      *results = *left / *right;
         break;
   }
   
