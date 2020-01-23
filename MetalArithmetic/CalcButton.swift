@@ -23,8 +23,8 @@ struct CalcButton : View {
         
         return Text(self.label)
         .foregroundColor(.white)
-          .font(.title).aspectRatio(CGFloat(1.0),contentMode: .fit)
-          .frame( idealWidth: .infinity, maxWidth: .infinity, idealHeight: .infinity, maxHeight: reader.size.height) })
+          .font(.title)//.aspectRatio(CGFloat(1.0),contentMode: .fit)
+          .frame( minWidth: 100, idealWidth: 100, maxWidth: .infinity, idealHeight: .infinity, maxHeight: reader.size.height) })
         .disabled(!self.isEnabled)
         .background( (self.color != .black) ? AnyView(Circle().fill(Color(self.color)).overlay(self.getGradient(color: self.color, size: reader.size))) : AnyView(Circle().stroke(style: StrokeStyle(lineWidth: 1))
           .stroke(Color.white)))
@@ -63,8 +63,12 @@ struct CalcButton : View {
 
 struct CalcButton_Previews: PreviewProvider {
     static var previews: some View {
+      Group{
       CalcButton(action: {}, label: "B",color: .darkGreen)
         .previewLayout(.fixed(width: 100, height: 100))
+      CalcButton(action: {}, label: "CE C",color: .brown)
+          .previewLayout(.fixed(width: 100, height: 100))
+      }
     }
 }
 

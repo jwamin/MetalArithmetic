@@ -6,13 +6,14 @@
 
 ## Done
 * Interface based on classic calculator and test pass through compute kernel
-* Addition arithmetic functions with GPU and CPU 
+* Basic arithmetic functions with GPU (Metal Compute Kernel) and CPU (Synchronous):
+  * Addition, Subtraction, Multiplication, Division
 * Feature set check to provide GPU capabilities to supported devices
 * Creates disabled button view overlay
 * Notifies user when using Metal to perform arithmetic
 
 ### TODO
-* Compute shaders to perform other basic arithmetic
-* CPU fallback
 * Unit Tests CPU vs GPU
+* `sqrt` and `M` functions
+* debug subtraction operation on GPU.
 
