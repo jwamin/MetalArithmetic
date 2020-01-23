@@ -14,6 +14,6 @@
 
 ### TODO
 * Unit Tests CPU vs GPU
-* `sqrt` and `M` functions
-* debug subtraction operation on GPU.
+* `sqrt`, `%` and `M` functions etc
+* debug subtraction operation on GPU
 
